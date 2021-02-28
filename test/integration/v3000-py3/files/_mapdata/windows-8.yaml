@@ -43,6 +43,13 @@ values:
         version: 0.23.0
     install_packages: true
     master:
+      ext_pillar:
+      - cmd_yaml: cat /etc/salt/yaml
+      - git:
+        - develop https://gitserver/git-pillar.git:
+          - env: base
+      - reclass:
+          inventory_base_uri: /etc/reclass
       file_roots:
         base:
         - "/srv/salt"
