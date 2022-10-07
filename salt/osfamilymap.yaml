@@ -133,7 +133,7 @@ OpenBSD:
 
 Windows:
   salt_minion: salt-minion{{ '-' ~ py_ver_repr if py_ver_repr else '' }}
-  config_path: 'C:\salt\conf'
+  config_path: {{ salt['config.get']('config_dir') }}
   minion_service: salt-minion
   rootuser: '{{ rootuser | d("") }}'
 
