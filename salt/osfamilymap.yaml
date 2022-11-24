@@ -22,6 +22,9 @@
 {%-   set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
 {%- elif grains.os_family == 'Windows' %}
 {%-   set rootuser = salt['cmd.run']("whoami").split("\\")[1] %}
+{%-   set config_dir = salt["config.get"]("config_dir") or salt["file.dirname"](
+            salt["config.get"]("conf_file")
+          ) %}
 {%- endif %}
 
 
@@ -134,7 +137,7 @@ OpenBSD:
 
 Windows:
   salt_minion: salt-minion{{ '-' ~ py_ver_repr if py_ver_repr else '' }}
-  config_path: {{ salt['config.get']('config_dir') }}
+  config_path: {{ config_dir | d('') }}
   minion_service: salt-minion
   rootuser: {{ rootuser | d('') }}
 
