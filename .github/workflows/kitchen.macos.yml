@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: 'Check out code'
         uses: 'actions/checkout@v2'
+      - name: Debug on runner
+        uses: mxschmitt/action-tmate@v3
+        with:
+          detached: true
       - name: 'Set up Bundler cache'
         uses: 'actions/cache@v1'
         with:
