@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: 'Check out code'
         uses: 'actions/checkout@v2'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
       - name: Debug on runner
         uses: mxschmitt/action-tmate@v3
         with:
@@ -30,11 +34,16 @@ jobs:
           restore-keys: "${{ runner.os }}-gems-"
       - name: 'Run Bundler'
         run: |
+          which python
+          python -V
           ruby --version
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       - name: 'Run Test Kitchen'
-        run: 'bundle exec kitchen verify ${{ matrix.instance }}'
+        run: |
+          echo $PATH
+          python -V
+          bundle exec kitchen verify ${{ matrix.instance }}
   test-11:
     runs-on: 'macos-11'
     strategy:
