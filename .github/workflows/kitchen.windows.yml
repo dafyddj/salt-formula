@@ -22,10 +22,10 @@ jobs:
       - name: 'Check out code'
         uses: 'actions/checkout@v2'
       - name: 'Install Chef'
-        uses: 'actionshub/chef-install@1.1.0'
+        uses: 'actionshub/chef-install@2.0.4'
         with:
           project: 'chef'
-          version: '16.10.8'
+          version: '18.3.0'
       - name: 'Add Chef bindir to PATH'
         uses: 'myci-actions/export-env-var-powershell@1'
         with:
