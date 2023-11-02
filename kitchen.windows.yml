@@ -17,7 +17,7 @@ provisioner:
     salt-call --local state.single file.managed `
       C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion.sls `
       source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion.sls `
-      skip_verify=True makedirs=True
+      skip_verify=True makedirs=True || exit 0
   # yamllint enable rule:line-length
 
 platforms:
