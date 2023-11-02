@@ -16,6 +16,8 @@ jobs:
         instance:
           - default-macos-12-latest-py3
     steps:
+      - name: Debug on runner
+        uses: mxschmitt/action-tmate@v3
       - name: 'Check out code'
         uses: 'actions/checkout@v2'
       - name: 'Set up Bundler cache'
