@@ -16,7 +16,7 @@ gem 'kitchen-docker', git: 'https://gitlab.com/saltstack-formulas/infrastructure
 # rubocop:enable Layout/LineLength
 
 gem 'kitchen-inspec', '>= 2.5.0'
-gem 'kitchen-salt', '>= 0.7.2'
+gem 'kitchen-salt', git: 'https://github.com/dafyddj/kitchen-salt.git', branch: 'tmp/bootstrap-path'
 
 # Avoid the error 'pkeys are immutable on OpenSSL 3.0'
 gem 'net-ssh', '>= 7.0.0'
