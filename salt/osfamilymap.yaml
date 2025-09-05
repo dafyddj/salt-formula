@@ -8,7 +8,6 @@
 # {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
 # {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
 # {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
-# yamllint enable rule:line-length
 
 # From `template-formula`
 # {%- if grains.os_family == 'MacOS' %}
@@ -16,11 +15,9 @@
 # {%-   set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
 # {%- elif grains.os_family == 'Windows' %}
 # {%-   set rootuser = salt['cmd.run']("whoami").split("\\")[1] %}
-# {%-   set config_dir = salt["config.get"]("config_dir") or salt["file.dirname"](
-#             salt["config.get"]("conf_file")
-#           ) %}
+# {%-   set config_dir = salt["config.get"]("config_dir") or salt["file.dirname"](salt["config.get"]("conf_file")) %}
 # {%- endif %}
-
+# yamllint enable rule:line-length
 
 Debian:
   pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
