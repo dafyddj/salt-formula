@@ -72,7 +72,7 @@ salt-minion:
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
             {%- if salt_settings.version %}
-    - version: {{ salt_settings.version }}
+    - version: '{{ salt_settings.version }}'
             {%- endif %}
             {% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
