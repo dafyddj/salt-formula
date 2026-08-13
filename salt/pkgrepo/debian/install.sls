@@ -12,15 +12,17 @@ salt-pkgrepo-install-saltstack-debian-keyring:
 
 salt-pkgrepo-install-saltstack-debian-remove-old-repo-file:
   file.absent:
-    - name: /etc/apt/sources.list.d/saltstack.list
+    - names:
+      - /etc/apt/sources.list.d/salt.list
+      - /etc/apt/sources.list.d/saltstack.list
     - require_in:
       - pkgrepo: salt-pkgrepo-install-saltstack-debian
 
 salt-pkgrepo-install-saltstack-debian:
   pkgrepo.managed:
-    - humanname: SaltStack Debian Repo
+    - humanname: Salt Project
     - name: {{ salt_settings.pkgrepo }}
-    - file: /etc/apt/sources.list.d/salt.list
+    - file: /etc/apt/sources.list.d/salt.sources
     {% if salt_settings.get('key_url') is not none %}
     - key_url: {{ salt_settings.key_url }}
     {% endif %}
