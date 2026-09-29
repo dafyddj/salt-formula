@@ -2,6 +2,8 @@
 # vim: ft=sls
 {% from "salt/map.jinja" import salt_settings with context %}
 
+{% set salt_3008_or_newer = grains["saltversioninfo"] >= [3008] -%}
+
 salt-pkgrepo-install-saltstack-debian-keyring:
   file.managed:
     - name: /etc/apt/keyrings/salt-archive-keyring.pgp
@@ -13,16 +15,20 @@ salt-pkgrepo-install-saltstack-debian-keyring:
 salt-pkgrepo-install-saltstack-debian-remove-old-repo-file:
   file.absent:
     - names:
+{%- if salt_3008_or_newer %}
       - /etc/apt/sources.list.d/salt.list
+{%- endif %}
       - /etc/apt/sources.list.d/saltstack.list
     - require_in:
       - pkgrepo: salt-pkgrepo-install-saltstack-debian
+
+{% set source_ext = "sources" if salt_3008_or_newer else "list" -%}
 
 salt-pkgrepo-install-saltstack-debian:
   pkgrepo.managed:
     - humanname: Salt Project
     - name: {{ salt_settings.pkgrepo }}
-    - file: /etc/apt/sources.list.d/salt.sources
+    - file: /etc/apt/sources.list.d/salt.{{ source_ext }}
     {% if salt_settings.get('key_url') is not none %}
     - key_url: {{ salt_settings.key_url }}
     {% endif %}
